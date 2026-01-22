@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Rincon do Café | Combarro</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- ESTILOS GENERALES --- */
+        :root {
+            --cafe-oscuro: #3e2723;
+            --cafe-claro: #d7ccc8;
+            --crema: #f5f5f5;
+            --acento: #a1887f;
+        }
+        
+        * { box-sizing: border-box; }
+
+        body { 
+            margin: 0; 
+            font-family: 'Helvetica Neue', sans-serif; 
+            color: #333; 
+            background: linear-gradient(to bottom, #fffbf2 0%, #f0e4d8 100%);
+            min-height: 100vh;
+            background-attachment: fixed;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 { color: var(--cafe-oscuro); margin-top: 0; }
+        img { max-width: 100%; height: auto; display: block; }
+        p { margin-bottom: 1.5rem; }
+
+        /* --- HERO SECTION Y LOGO --- */
+        .hero {
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img/4617766-19357537.jpg'); 
+            background-size: cover;
+            background-position: center;
+            height: 80vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        
+        /* Estilo del Logo */
+        .logo-principal {
+            max-width: 300px;
+            height: auto;
+            margin: 0 auto 20px auto;
+            display: block;
+            filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+        }
+
+        .btn {
+            background-color: var(--acento);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+            transition: background 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn:hover { background-color: var(--cafe-oscuro); }
+
+        .container { 
+            max-width: 1100px; 
+            margin: 0 auto; 
+            padding: 60px 20px; 
+            text-align: center; 
+        }
+
+        /* --- BARISTA --- */
+        .barista-section {
+            background-color: white;
+            display: flex; 
+            align-items: center; 
+            text-align: left;
+            border-radius: 10px;
+            overflow: hidden; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+        }
+        .foto-ivan { width: 50%; height: 500px; object-fit: cover; }
+        .barista-text { width: 50%; padding: 40px; }
+
+        /* --- GALERÍA DESLIZANTE --- */
+        .gallery-container {
+            display: flex;
+            overflow-x: auto; 
+            gap: 15px;
+            padding-bottom: 20px;
+            scroll-behavior: smooth; 
+            scrollbar-width: thin;
+            scrollbar-color: var(--acento) transparent;
+        }
+        
+        .gallery-img {
+            height: 300px; 
+            width: auto;   
+            border-radius: 8px;
+            cursor: pointer; 
+            transition: transform 0.3s;
+            flex-shrink: 0; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+        .gallery-img:hover { transform: scale(1.05); }
+
+        /* --- LIGHTBOX (VENTANAS MODALES) --- */
+        .lightbox {
+            display: none; 
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80vh;
+            border: 4px solid white;
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+        }
+        
+        /* Caja para texto legal */
+        .legal-box {
+            background: white;
+            padding: 30px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-radius: 8px;
+            text-align: left;
+            position: relative;
+        }
+
+        .close-btn {
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .close-btn-legal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* --- COOKIES BANNER --- */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            z-index: 9999;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .cookie-btn {
+            background-color: white;
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* --- CARTA Y FOOTER --- */
+        .menu-preview { background-color: var(--cafe-claro); border-radius: 10px; margin-top: 40px; margin-bottom: 40px; }
+        
+        footer { background-color: var(--cafe-oscuro); color: white; padding: 40px 20px; text-align: center; }
+        
+        /* Enlaces Legales del Footer */
+        .footer-legal-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin: 0 5px;
+        }
+        .footer-legal-links a:hover { color: white; text-decoration: underline; }
+
+        .location-icon { margin-right: 10px; }
+        .social-links-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px; 
+            margin: 40px 0;
+        }
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px; height: 70px; 
+            border-radius: 50%; 
+            border: 2px solid #ffffff !important; 
+            background-color: transparent; 
+            color: #ffffff !important; 
+            text-decoration: none !important;
+            font-size: 2rem; 
+            transition: all 0.3s ease;
+        }
+        .social-btn i { color: #ffffff !important; }
+        .social-btn:hover { 
+            background-color: #ffffff !important; 
+            color: #3e2723 !important; 
+            transform: scale(1.1); 
+        }
+        .social-btn:hover i { color: #3e2723 !important; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .logo-principal { max-width: 200px; }
+            .barista-section { flex-direction: column; }
+            .foto-ivan { width: 100%; height: auto; max-height: 400px; }
+            .barista-text { width: 100%; padding: 25px; text-align: center; }
+            .gallery-img { height: 250px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cookieBanner" class="cookie-banner">
+        <span>🍪 Utilizamos cookies propias para mejorar tu experiencia. Si sigues navegando, aceptas su uso.</span>
+        <button class="cookie-btn" onclick="acceptCookies()">Aceptar</button>
+    </div>
+
+    <header class="hero">
+        <div>
+            <img src="img/logo.png" alt="Logo O Rincon do Café" class="logo-principal">
+            <p style="font-size: 1.5rem; color: white;">El arte del buen café en Combarro</p>
+            <a href="#carta" class="btn">Ver Nuestra Carta</a>
+        </div>
+    </header>
+
+    <section class="container">
+        <h2>El Corazón de Combarro</h2>
+        <p>Cada mañana, el aroma inconfundible de nuestro café despierta a Combarro. Desde 2005, somos el motor de miles de vecinos, la parada obligatoria de turistas de todo el mundo y el <strong>impulso vital para los miles de peregrinos</strong> que buscan fuerzas para seguir el Camino.</p>
+        <p>Aquí el desayuno es sagrado: disfruta de nuestras <strong>tostadas de pan gallego</strong>, bollería tierna y, sobre todo, de un café de especialidad preparado con maestría. Y si el hambre aprieta más tarde, nuestros clásicos bocatas siempre estarán esperándote.</p>
+    </section>
+
+    <section class="container">
+        <div class="barista-section">
+            <img src="img/ivan.jpeg" alt="Barista Iván preparando café" class="foto-ivan">
+            <div class="barista-text">
+                <h3>Hola, soy Iván</h3>
+                <p>Me confieso un <strong>perfeccionista del café</strong>. Para mí, cada taza es un examen donde no valen los atajos. Me obsesiona el control de cada detalle: el punto exacto del molido, la presión de la máquina y la temperatura precisa de la leche.</p>
+                <p>Mi filosofía es clara: <strong>si el café no está impecable, no sale de la barra</strong>. Mi compromiso es que cada sorbo que des sea una experiencia de calidad absoluta.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2>Nuestro Rincón</h2>
+        <p style="font-size: 0.9rem; opacity: 0.7;">(Toca las fotos para ampliar)</p>
+        
+        <div class="gallery-container" id="gallerySlider">
+            <img src="img/bombon.jpeg" class="gallery-img" onclick="openModal(this)">
+            <img src="img/barra.jpeg" class="gallery-img" onclick="openModal(this)">
+            <img src="img/cafeart.jpeg" class="gallery-img" onclick="openModal(this)">
+            <img src="img/bocata.jpeg" class="gallery-img" onclick="openModal(this)">
+            <img src="img/hambur.jpeg" class="gallery-img" onclick="openModal(this)">
+        </div>
+    </section>
+
+    <section id="carta" class="container menu-preview">
+        <h2>Nuestra Carta / Our Menu</h2>
+        <p>Cafés de especialidad, bocatas y repostería casera.<br>Specialty coffee, sandwiches, and homemade pastries.</p>
+        
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+            <a href="Menú_Castellano.pdf" target="_blank" class="btn">🇪🇸 Ver Carta</a>
+            <a href="Menú _English.pdf" target="_blank" class="btn" style="background-color: #555;">🇬🇧 English Menu</a>
+        </div>
+    </section>
+
+    <footer>
+        <h3 style="margin-bottom: 30px; font-size: 2.5rem; font-family: 'Great Vibes', cursive;">O Rincon do Café</h3>
+        
+        <p>
+            <a href="https://www.google.com/maps/search/?api=1&query=O+Rincon+do+Cafe+Combarro" target="_blank" style="color: white; text-decoration: none; font-size: 1.3rem; display: flex; align-items: center; justify-content: center;">
+                <i class="fa-solid fa-location-dot location-icon"></i>
+                Rúa Maceira 1, Combarro (Ver Mapa)
+            </a>
+        </p>
+
+        <div class="social-links-container">
+            <a href="https://www.facebook.com/TU_PAGINA" target="_blank" class="social-btn" title="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+
+            <a href="https://www.instagram.com/TU_USUARIO" target="_blank" class="social-btn" title="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+        </div>
+
+        <p style="margin-top: 30px;">🕒 Lunes a Sabado 08:00-00:00 / Domingos 10:00-15:00<br>Telefono: 986772333</p>
+        
+        <div class="footer-legal-links" style="margin-top: 20px;">
+            <a href="javascript:void(0);" onclick="openLegal('aviso')">Aviso Legal</a> | 
+            <a href="javascript:void(0);" onclick="openLegal('privacidad')">Política de Privacidad y Cookies</a>
+        </div>
+
+        <p style="font-size: 0.9rem; opacity: 0.6; margin-top: 10px;">© 2005 - 2026 O Rincon do Café</p>
+    </footer>
+
+    <div id="myLightbox" class="lightbox" onclick="closeModal()">
+        <span class="close-btn">×</span>
+        <img id="lightboxImg" src="">
+        <p style="color: white; margin-top: 10px;">Toca para cerrar</p>
+    </div>
+
+    <div id="legalModal" class="lightbox">
+        <div class="legal-box">
+            <span class="close-btn-legal" onclick="closeLegal()">×</span>
+            
+            <div id="legalContentAviso" style="display:none;">
+                <h3>Aviso Legal</h3>
+                <p>En cumplimiento de la Ley 34/2002 de Servicios de la Sociedad de la Información, informamos que el titular de este sitio web es:</p>
+                <ul>
+                    <li><strong>Nombre Comercial:</strong> O Rincon do Café</li>
+                    <li><strong>Titular:</strong> [PON AQUÍ TU NOMBRE COMPLETO O EMPRESA]</li>
+                    <li><strong>NIF/CIF:</strong> [PON AQUÍ TU DNI O CIF]</li>
+                    <li><strong>Dirección:</strong> Rúa Maceira 1, 36993, Combarro (Pontevedra)</li>
+                    <li><strong>Teléfono:</strong> 986772333</li>
+                </ul>
+            </div>
+
+            <div id="legalContentPrivacidad" style="display:none;">
+                <h3>Política de Privacidad y Cookies</h3>
+                <p><strong>1. Protección de Datos:</strong> O Rincon do Café cumple con el Reglamento General de Protección de Datos (RGPD). Sus datos no serán compartidos con terceros sin su consentimiento.</p>
+                <p><strong>2. Uso de Cookies:</strong> Utilizamos cookies esenciales para el funcionamiento de la web. No utilizamos cookies publicitarias de terceros que rastreen su comportamiento fuera de este sitio.</p>
+                <p>Puede configurar su navegador para rechazar las cookies, aunque esto podría afectar al funcionamiento de la web.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. FUNCIONES PARA FOTOS
+        function openModal(element) {
+            var lightbox = document.getElementById("myLightbox");
+            var lightboxImg = document.getElementById("lightboxImg");
+            lightboxImg.src = element.src; 
+            lightbox.style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("myLightbox").style.display = "none";
+        }
+
+        // 2. FUNCIONES PARA COOKIES
+        function acceptCookies() {
+            document.getElementById("cookieBanner").style.display = "none";
+        }
+
+        // 3. FUNCIONES PARA LEGAL
+        function openLegal(tipo) {
+            document.getElementById("legalModal").style.display = "flex";
+            document.getElementById("legalContentAviso").style.display = "none";
+            document.getElementById("legalContentPrivacidad").style.display = "none";
+
+            if (tipo === 'aviso') {
+                document.getElementById("legalContentAviso").style.display = "block";
+            } else {
+                document.getElementById("legalContentPrivacidad").style.display = "block";
+            }
+        }
+        function closeLegal() {
+            document.getElementById("legalModal").style.display = "none";
+        }
+    </script>
+</body>
+</html>
