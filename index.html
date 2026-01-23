@@ -17,6 +17,7 @@
             --cafe-claro: #d7ccc8;
             --crema: #f5f5f5;
             --acento: #a1887f;
+            --dorado: #ffb300;
         }
         
         * { box-sizing: border-box; }
@@ -114,7 +115,161 @@
         }
         .gallery-img:hover { transform: scale(1.05); }
 
-        /* --- LIGHTBOX (VENTANAS MODALES) --- */
+        /* --- ESTILOS DE LA CARTA (MENU) --- */
+        .menu-section {
+            background-color: white;
+            padding: 40px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            max-width: 900px;
+            margin: 40px auto;
+            text-align: left;
+        }
+
+        /* TÍTULOS DE CATEGORÍA CON TOGGLE */
+        .grupo-categoria {
+            margin-bottom: 10px;
+        }
+
+        .categoria-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--acento);
+            padding: 10px 0;
+            margin-top: 30px;
+            transition: color 0.3s;
+        }
+        
+        /* En escritorio no queremos cursor pointer, solo en movil. Lo sobreescribimos en media queries */
+        .categoria-header { cursor: default; pointer-events: none; }
+        .flecha-toggle { display: none; } /* Oculta flecha en PC */
+
+        .categoria-titulo {
+            color: var(--cafe-oscuro);
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .contenido-categoria {
+            /* En PC siempre visible */
+            display: block !important; 
+            opacity: 1 !important;
+            max-height: none !important;
+        }
+
+        .subcategoria {
+            color: var(--acento);
+            font-weight: bold;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        /* CAJA DE AVISO ALÉRGENOS */
+        .aviso-alergenos {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            line-height: 1.5;
+        }
+        .aviso-icon { font-size: 1.5rem; margin-top: 2px; }
+
+        .plato-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 10px;
+        }
+
+        .plato-info { flex: 1; padding-right: 15px; }
+
+        .plato-nombre {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #333;
+            display: block;
+        }
+
+        .plato-desc {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 2px 0 0 0;
+            font-style: italic;
+        }
+
+        .plato-precio {
+            font-weight: bold;
+            color: var(--cafe-oscuro);
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
+
+        /* --- NUEVO DISEÑO PACK DESAYUNO (CON IMAGEN DE FONDO) --- */
+        .oferta-box {
+            position: relative;
+            /* Imagen de fondo de desayuno (placeholder de alta calidad) */
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=800&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 40px 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border: none;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .oferta-box:hover { transform: translateY(-3px); }
+
+        .oferta-badge {
+            background-color: var(--dorado);
+            color: #333;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .oferta-box h4 { 
+            margin: 10px 0; 
+            font-size: 2rem; 
+            color: #fff; 
+            font-family: 'Great Vibes', cursive;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .oferta-desc { font-size: 1.1rem; color: #eee; margin-bottom: 15px; }
+        
+        .oferta-precio { 
+            font-size: 2.2rem; 
+            font-weight: bold; 
+            color: var(--dorado); 
+            margin-top: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        /* --- LIGHTBOX Y LEGALES --- */
         .lightbox {
             display: none; 
             position: fixed;
@@ -137,7 +292,6 @@
             box-shadow: 0 0 20px rgba(0,0,0,0.8);
         }
         
-        /* Caja para texto legal */
         .legal-box {
             background: white;
             padding: 30px;
@@ -199,12 +353,9 @@
             cursor: pointer;
         }
 
-        /* --- CARTA Y FOOTER --- */
-        .menu-preview { background-color: var(--cafe-claro); border-radius: 10px; margin-top: 40px; margin-bottom: 40px; }
-        
+        /* --- FOOTER --- */
         footer { background-color: var(--cafe-oscuro); color: white; padding: 40px 20px; text-align: center; }
         
-        /* Enlaces Legales del Footer */
         .footer-legal-links a {
             color: #ccc;
             text-decoration: none;
@@ -241,13 +392,51 @@
         }
         .social-btn:hover i { color: #3e2723 !important; }
 
-        /* --- RESPONSIVE --- */
+        /* --- RESPONSIVE LOGIC (MÓVIL) --- */
         @media (max-width: 768px) {
             .logo-principal { max-width: 200px; }
             .barista-section { flex-direction: column; }
             .foto-ivan { width: 100%; height: auto; max-height: 400px; }
             .barista-text { width: 100%; padding: 25px; text-align: center; }
             .gallery-img { height: 250px; }
+            
+            /* --- LÓGICA ACORDEÓN SOLO PARA MÓVIL --- */
+            .categoria-header { 
+                cursor: pointer; /* Activamos el click */
+                pointer-events: auto;
+                background-color: #f9f9f9;
+                padding: 10px 15px;
+                border-radius: 5px;
+                border-bottom: none;
+                margin-top: 15px;
+            }
+            .categoria-titulo { font-size: 1.8rem; }
+            
+            .flecha-toggle { 
+                display: block; /* Mostramos la flecha */
+                color: var(--acento);
+                transition: transform 0.3s;
+            }
+
+            /* Contenido oculto por defecto en móvil */
+            .contenido-categoria {
+                display: none !important;
+                padding: 10px;
+                animation: fadeIn 0.4s ease;
+            }
+
+            /* Clase para cuando está abierto */
+            .grupo-categoria.activo .contenido-categoria {
+                display: block !important;
+            }
+            .grupo-categoria.activo .flecha-toggle {
+                transform: rotate(180deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -296,13 +485,324 @@
         </div>
     </section>
 
-    <section id="carta" class="container menu-preview">
-        <h2>Nuestra Carta / Our Menu</h2>
-        <p>Cafés de especialidad, bocatas y repostería casera.<br>Specialty coffee, sandwiches, and homemade pastries.</p>
+    <section id="carta" class="container">
+        <h2>Nuestra Carta</h2>
         
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
-            <a href="Menú_Castellano.pdf" target="_blank" class="btn">🇪🇸 Ver Carta</a>
-            <a href="Menú _English.pdf" target="_blank" class="btn" style="background-color: #555;">🇬🇧 English Menu</a>
+        <div class="menu-section">
+
+            <div class="aviso-alergenos">
+                <i class="fa-solid fa-circle-info aviso-icon"></i>
+                <div>
+                    <strong>Información sobre Alérgenos e Intolerancias:</strong><br>
+                    En nuestro establecimiento elaboramos platos que pueden contener gluten, lácteos, huevo, pescado, frutos secos y otros alérgenos. Si tienes alguna intolerancia o alergia, <strong>por favor consulta a nuestro personal antes de pedir</strong>. Estaremos encantados de informarte.
+                </div>
+            </div>
+
+            <div class="oferta-box">
+                <span class="oferta-badge">Recomendado</span>
+                <h4>Pack Desayuno</h4>
+                <p class="oferta-desc">Café + Croissant o Donut + Zumo Natural</p>
+                <div class="oferta-precio">5,50€</div>
+            </div>
+
+            <div class="grupo-categoria">
+                <div class="categoria-header" onclick="toggleCategoria(this)">
+                    <h3 class="categoria-titulo">Desayunos y Dulces</h3>
+                    <i class="fa-solid fa-chevron-down flecha-toggle"></i>
+                </div>
+                
+                <div class="contenido-categoria">
+                    <div class="subcategoria">Bollería</div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Croissant</span></div>
+                        <span class="plato-precio">1,70€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Donuts Artesano</span></div>
+                        <span class="plato-precio">1,70€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Croissant a la Plancha</span></div>
+                        <span class="plato-precio">3,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Croissant Jamón y Queso</span></div>
+                        <span class="plato-precio">3,50€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Churros (12 unidades)</span></div>
+                        <span class="plato-precio">4,00€</span>
+                    </div>
+
+                    <div class="subcategoria">Tostadas</div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Mantequilla y Mermelada</span></div>
+                        <span class="plato-precio">1,80€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Solo Aceite</span></div>
+                        <span class="plato-precio">2,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Aceite y Tomate</span></div>
+                        <span class="plato-precio">2,50€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Jamón, Tomate y Aceite</span></div>
+                        <span class="plato-precio">3,20€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Aguacate</span></div>
+                        <span class="plato-precio">3,50€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Revuelto de Huevo</span></div>
+                        <span class="plato-precio">4,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Atún y Tomate</span></div>
+                        <span class="plato-precio">5,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Huevos y Atún</span></div>
+                        <span class="plato-precio">5,50€</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grupo-categoria">
+                <div class="categoria-header" onclick="toggleCategoria(this)">
+                    <h3 class="categoria-titulo">Raciones</h3>
+                    <i class="fa-solid fa-chevron-down flecha-toggle"></i>
+                </div>
+                
+                <div class="contenido-categoria">
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Patatas Fritas</span></div>
+                        <span class="plato-precio">3,50€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Patatas Gajo</span></div>
+                        <span class="plato-precio">4,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Salchipapas</span></div>
+                        <span class="plato-precio">4,50€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Alitas de Pollo</span></div>
+                        <span class="plato-precio">8,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Fingers de Pollo</span></div>
+                        <span class="plato-precio">8,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Croquetas de Jamón</span></div>
+                        <span class="plato-precio">8,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Tabla de Jamón y Queso</span></div>
+                        <span class="plato-precio">8,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Rabas de Calamar</span></div>
+                        <span class="plato-precio">9,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Choricillos a la sartén</span></div>
+                        <span class="plato-precio">9,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Raxo (con patatas)</span></div>
+                        <span class="plato-precio">9,00€</span>
+                    </div>
+                     <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Zorza (con patatas)</span></div>
+                        <span class="plato-precio">9,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Tortilla Española</span></div>
+                        <span class="plato-precio">12,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Pizza Familiar</span></div>
+                        <span class="plato-precio">15,00€</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grupo-categoria">
+                <div class="categoria-header" onclick="toggleCategoria(this)">
+                    <h3 class="categoria-titulo">Hamburguesas</h3>
+                    <i class="fa-solid fa-chevron-down flecha-toggle"></i>
+                </div>
+
+                <div class="contenido-categoria">
+                    <div class="plato-item">
+                        <div class="plato-info">
+                            <span class="plato-nombre">Completa</span>
+                            <p class="plato-desc">Carne, queso, cebolla, lechuga, tomate y huevo</p>
+                        </div>
+                        <span class="plato-precio">5,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info">
+                            <span class="plato-nombre">Crispy</span>
+                            <p class="plato-desc">Crujiente de pollo, queso, cebolla, lechuga, tomate y huevo</p>
+                        </div>
+                        <span class="plato-precio">6,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info">
+                            <span class="plato-nombre">Doble Completa</span>
+                            <p class="plato-desc">Doble carne, queso, cebolla, lechuga, tomate y huevo</p>
+                        </div>
+                        <span class="plato-precio">7,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info">
+                            <span class="plato-nombre">Hamburguesa Extra</span>
+                            <p class="plato-desc">Doble carne, lomo, bacon, queso y huevo</p>
+                        </div>
+                        <span class="plato-precio">8,00€</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grupo-categoria">
+                <div class="categoria-header" onclick="toggleCategoria(this)">
+                    <h3 class="categoria-titulo">Bocadillos & Sándwiches</h3>
+                    <i class="fa-solid fa-chevron-down flecha-toggle"></i>
+                </div>
+
+                <div class="contenido-categoria">
+                    <p style="text-align: right; color: var(--acento); font-weight: bold; margin-bottom: 10px;">+ Cesto de patatas: 1,50€</p>
+                    
+                    <div class="subcategoria">Bocadillos</div>
+                    
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Jamón Asado</span></div>
+                        <span class="plato-precio">4,50€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Jamón Asado con Queso</span></div>
+                        <span class="plato-precio">5,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info">
+                            <span class="plato-nombre">Jamón Asado Queso y huevo</span>
+                        </div>
+                        <span class="plato-precio">6,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info">
+                            <span class="plato-nombre">Lomo Completo</span>
+                            <p class="plato-desc">Lomo, queso, cebolla, lechuga, tomate y huevo</p>
+                        </div>
+                        <span class="plato-precio">5,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info">
+                            <span class="plato-nombre">Bacon Completo</span>
+                            <p class="plato-desc">Bacon, queso, cebolla, lechuga, tomate y huevo</p>
+                        </div>
+                        <span class="plato-precio">5,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info">
+                            <span class="plato-nombre">Serranito</span>
+                            <p class="plato-desc">Jamón serrano, queso y tomate</p>
+                        </div>
+                        <span class="plato-precio">5,50€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info">
+                            <span class="plato-nombre">Rabas de Calamar</span>
+                        </div>
+                        <span class="plato-precio">6,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info">
+                            <span class="plato-nombre">Pollo Completo</span>
+                            <p class="plato-desc">Pollo, queso, cebolla, lechuga, tomate y huevo</p>
+                        </div>
+                        <span class="plato-precio">6,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info">
+                            <span class="plato-nombre">Pollo Campero</span>
+                            <p class="plato-desc">Pollo, queso, huevo y pimiento del piquillo</p>
+                        </div>
+                        <span class="plato-precio">6,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info">
+                            <span class="plato-nombre">Milanesa de Pollo</span>
+                            <p class="plato-desc">Crujiente de pollo, queso, cebolla, lechuga, tomate y huevo</p>
+                        </div>
+                        <span class="plato-precio">6,50€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Bocata de Zorza</span></div>
+                        <span class="plato-precio">7,00€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Raxo Completo</span>
+                        <p class="plato-desc">Raxo, queso, cebolla, lechuga, tomate y huevo</p>
+                        </div>
+                        <span class="plato-precio">7,00€</span>
+                    </div>
+                     <div class="plato-item">
+                        <div class="plato-info">
+                            <span class="plato-nombre">Pollo Extra</span>
+                            <p class="plato-desc">Pollo, queso, lomo, bacon, huevo</p>
+                        </div>
+                        <span class="plato-precio">8,00€</span>
+                    </div>
+
+                    <div class="subcategoria">Sándwiches</div>
+                    <div class="plato-item">
+                        <div class="plato-info"><span class="plato-nombre">Mixto</span></div>
+                        <span class="plato-precio">3,50€</span>
+                    </div>
+                    <div class="plato-item">
+                        <div class="plato-info">
+                            <span class="plato-nombre">Vegetal</span>
+                            <p class="plato-desc">Jamón, queso, cebolla, lechuga, tomate y atún</p>
+                        </div>
+                        <span class="plato-precio">5,00€</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grupo-categoria">
+                <div class="categoria-header" onclick="toggleCategoria(this)">
+                    <h3 class="categoria-titulo">Platos Combinados</h3>
+                    <i class="fa-solid fa-chevron-down flecha-toggle"></i>
+                </div>
+
+                <div class="contenido-categoria">
+                    <p style="text-align: center; margin-bottom: 20px;">Todos incluyen patatas o ensalada.</p>
+                    <div class="plato-item" style="background-color: #fafafa; padding: 15px; border-radius: 5px;">
+                        <div class="plato-info">
+                            <span class="plato-nombre" style="font-size: 1.2rem;">Elige tu principal:</span>
+                            <ul style="margin: 10px 0 10px 20px; font-size: 0.95rem; color: #555;">
+                                <li>Pechuga de Pollo</li>
+                                <li>Zorza</li>
+                                <li>Raxo</li>
+                                <li>Jamón Asado</li>
+                                <li>Milanesa de Pollo</li>
+                                <li>Rabas</li>
+                                <li>Chorizo</li>
+                            </ul>
+                            <p style="margin:0; font-weight: bold; color: var(--acento);">+ Huevo frito: 1,00€</p>
+                        </div>
+                        <span class="plato-precio" style="font-size: 1.5rem;">7,00€</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -317,11 +817,11 @@
         </p>
 
         <div class="social-links-container">
-            <a href=https://www.facebook.com/people/O-Rinc%C3%B3n-do-cafe/61550969906953/?rdid=fYxUQiKvBsssSvFY&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F181xSjV2Sr%2F target="_blank" class="social-btn" title="Facebook">
+            <a href="https://www.facebook.com/TU_PAGINA" target="_blank" class="social-btn" title="Facebook">
                 <i class="fa-brands fa-facebook-f"></i>
             </a>
 
-            <a href=https://www.instagram.com/o_rincon_do_cafe?igsh=MXR5c2UzbjlpNWJvOQ%3D%3D target="_blank" class="social-btn" title="Instagram">
+            <a href="https://www.instagram.com/TU_USUARIO" target="_blank" class="social-btn" title="Instagram">
                 <i class="fa-brands fa-instagram"></i>
             </a>
         </div>
@@ -351,8 +851,8 @@
                 <p>En cumplimiento de la Ley 34/2002 de Servicios de la Sociedad de la Información, informamos que el titular de este sitio web es:</p>
                 <ul>
                     <li><strong>Nombre Comercial:</strong> O Rincon do Café</li>
-                    <li><strong>Titular:</strong> IVAN PEREZ RODIÑO</li>
-                    <li><strong>NIF/CIF:</strong> 76930184Z</li>
+                    <li><strong>Titular:</strong> [PON AQUÍ TU NOMBRE COMPLETO O EMPRESA]</li>
+                    <li><strong>NIF/CIF:</strong> [PON AQUÍ TU DNI O CIF]</li>
                     <li><strong>Dirección:</strong> Rúa Maceira 1, 36993, Combarro (Pontevedra)</li>
                     <li><strong>Teléfono:</strong> 986772333</li>
                 </ul>
@@ -400,7 +900,17 @@
         function closeLegal() {
             document.getElementById("legalModal").style.display = "none";
         }
+
+        // 4. FUNCIÓN NUEVA: ACORDEÓN DE CARTA (SOLO MÓVIL)
+        function toggleCategoria(elemento) {
+            // Solo activamos si estamos en móvil (pantalla menor a 768px)
+            if (window.innerWidth <= 768) {
+                // Buscamos el padre (el div .grupo-categoria)
+                var grupo = elemento.parentElement;
+                // Le quitamos o ponemos la clase 'activo'
+                grupo.classList.toggle("activo");
+            }
+        }
     </script>
 </body>
-
 </html>
